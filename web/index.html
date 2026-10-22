@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0d1117">
+  <title>轻刮 QingGua · 轻量影视刮削器</title>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <svg class="svg-defs" aria-hidden="true">
+    <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></symbol>
+    <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+    <symbol id="i-folder" viewBox="0 0 24 24"><path d="M3 7.5A2.5 2.5 0 0 1 5.5 5H9l2 2.5h7.5A2.5 2.5 0 0 1 21 10v7a2.5 2.5 0 0 1-2.5 2.5h-13A2.5 2.5 0 0 1 3 17z"/></symbol>
+    <symbol id="i-scan" viewBox="0 0 24 24"><path d="M4 8V5.5A1.5 1.5 0 0 1 5.5 4H8M16 4h2.5A1.5 1.5 0 0 1 20 5.5V8M20 16v2.5a1.5 1.5 0 0 1-1.5 1.5H16M8 20H5.5A1.5 1.5 0 0 1 4 18.5V16M7 12h10"/></symbol>
+    <symbol id="i-spark" viewBox="0 0 24 24"><path d="m12 3 1.7 5.3L19 10l-5.3 1.7L12 17l-1.7-5.3L5 10l5.3-1.7z"/><path d="m18.5 15 .8 2.2 2.2.8-2.2.8-.8 2.2-.8-2.2-2.2-.8 2.2-.8z"/></symbol>
+    <symbol id="i-settings" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19 12a7 7 0 0 0-.1-1.2l2-1.5-2-3.4-2.3.9a7 7 0 0 0-2-1.2L14.3 3h-4.6l-.3 2.6a7 7 0 0 0-2 1.2l-2.3-.9-2 3.4 2 1.5A7 7 0 0 0 5 12c0 .4 0 .8.1 1.2l-2 1.5 2 3.4 2.3-.9a7 7 0 0 0 2 1.2l.3 2.6h4.6l.3-2.6a7 7 0 0 0 2-1.2l2.3.9 2-3.4-2-1.5c.1-.4.1-.8.1-1.2Z"/></symbol>
+    <symbol id="i-film" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2.5"/><path d="M7 4v16M17 4v16M3 9h4M3 15h4M17 9h4M17 15h4"/></symbol>
+    <symbol id="i-tv" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="13" rx="2.5"/><path d="m8 21 4-3 4 3M8 2l4 3 4-3"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12 4.5 4.5L19 7"/></symbol>
+    <symbol id="i-alert" viewBox="0 0 24 24"><path d="M12 8v5M12 17h.01"/><path d="M10.3 3.8 2.6 17.2A2 2 0 0 0 4.3 20h15.4a2 2 0 0 0 1.7-2.8L13.7 3.8a2 2 0 0 0-3.4 0Z"/></symbol>
+    <symbol id="i-close" viewBox="0 0 24 24"><path d="m6 6 12 12M18 6 6 18"/></symbol>
+    <symbol id="i-external" viewBox="0 0 24 24"><path d="M14 4h6v6M20 4l-9 9"/><path d="M19 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1h5"/></symbol>
+    <symbol id="i-edit" viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/></symbol>
+    <symbol id="i-image" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2.5"/><circle cx="8.5" cy="9" r="1.5"/><path d="m21 15-4.5-4.5L7 20"/></symbol>
+    <symbol id="i-play" viewBox="0 0 24 24"><path d="m8 5 11 7-11 7z"/></symbol>
+    <symbol id="i-trash" viewBox="0 0 24 24"><path d="M4 7h16M9 7V4h6v3M6 7l1 14h10l1-14M10 11v6M14 11v6"/></symbol>
+    <symbol id="i-chevron" viewBox="0 0 24 24"><path d="m9 6 6 6-6 6"/></symbol>
+    <symbol id="i-refresh" viewBox="0 0 24 24"><path d="M20 11a8 8 0 1 0-2.3 6.7M20 5v6h-6"/></symbol>
+  </svg>
+
+  <div class="shell">
+    <aside class="rail">
+      <div class="brand">
+        <div class="brand-mark"><svg><use href="#i-film"/></svg><span class="brand-spark"><svg><use href="#i-spark"/></svg></span></div>
+        <div class="brand-text">
+          <strong>轻刮</strong>
+          <span>QingGua</span>
+        </div>
+        <span class="version" id="version">v0.1</span>
+      </div>
+
+      <nav class="filters" aria-label="作品筛选">
+        <button class="filter active" data-action="filter" data-filter="all">
+          <span class="filter-icon"><svg><use href="#i-film"/></svg></span>
+          <span>全部作品</span><b id="count-all">0</b>
+        </button>
+        <button class="filter" data-action="filter" data-filter="movie">
+          <span class="filter-icon"><svg><use href="#i-film"/></svg></span>
+          <span>电影</span><b id="count-movie">0</b>
+        </button>
+        <button class="filter" data-action="filter" data-filter="tv">
+          <span class="filter-icon"><svg><use href="#i-tv"/></svg></span>
+          <span>剧集</span><b id="count-tv">0</b>
+        </button>
+        <button class="filter" data-action="filter" data-filter="attention">
+          <span class="filter-icon warn"><svg><use href="#i-alert"/></svg></span>
+          <span>待确认</span><b id="count-attention">0</b>
+        </button>
+        <button class="filter" data-action="filter" data-filter="applied">
+          <span class="filter-icon ok"><svg><use href="#i-check"/></svg></span>
+          <span>已刮削</span><b id="count-applied">0</b>
+        </button>
+      </nav>
+
+      <div class="rail-section">
+        <div class="rail-title">
+          <span>媒体库</span>
+          <button class="icon-btn tiny" data-action="add-folder" title="添加文件夹"><svg><use href="#i-plus"/></svg></button>
+        </div>
+        <div id="folder-list" class="folder-list">
+          <div class="rail-empty">还没有添加目录</div>
+        </div>
+      </div>
+
+      <div class="rail-section" id="series-section" hidden>
+        <div class="rail-title"><span>系列</span></div>
+        <div id="series-list" class="series-list"></div>
+      </div>
+
+      <div class="rail-footer">
+        <div class="source-card">
+          <span class="source-dot" id="source-dot"></span>
+          <div>
+            <strong id="source-name">豆瓣</strong>
+            <span id="source-desc">无需 API Key</span>
+          </div>
+        </div>
+        <div class="rail-actions">
+          <button class="ghost small" data-action="settings"><svg><use href="#i-settings"/></svg>设置</button>
+          <button class="ghost small" data-action="demo"><svg><use href="#i-spark"/></svg>演示库</button>
+        </div>
+      </div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <div class="heading">
+          <p class="eyebrow">LIGHTWEIGHT MEDIA SCRAPER</p>
+          <h1 id="page-title">媒体库</h1>
+        </div>
+        <div class="top-actions">
+          <label class="searchbox">
+            <svg><use href="#i-search"/></svg>
+            <input id="search-input" type="search" placeholder="搜索标题、目录…" autocomplete="off">
+            <kbd>Ctrl K</kbd>
+          </label>
+          <button class="btn ghost" data-action="scan"><svg><use href="#i-scan"/></svg><span>扫描</span></button>
+          <button class="btn primary" data-action="auto"><svg><use href="#i-spark"/></svg><span>一键刮削</span></button>
+        </div>
+      </header>
+
+      <section class="hero" id="hero">
+        <div class="hero-copy">
+          <span class="pill"><svg><use href="#i-spark"/></svg>只做一件事</span>
+          <h2>把文件名交给轻刮，<br><em>海报、简介、NFO</em> 一次到位。</h2>
+          <p>不播放、不建库、不塞插件。扫描目录，自动识别电影与剧集，匹配豆瓣或 TMDb，然后把干净的元数据写进你的媒体库。</p>
+          <div class="hero-actions">
+            <button class="btn primary large" data-action="add-folder"><svg><use href="#i-plus"/></svg>添加媒体文件夹</button>
+            <button class="btn ghost large" data-action="demo"><svg><use href="#i-play"/></svg>先看看演示</button>
+          </div>
+          <div class="hero-notes">
+            <span><svg><use href="#i-check"/></svg>零第三方依赖</span>
+            <span><svg><use href="#i-check"/></svg>Jellyfin / Emby / Kodi 通用 NFO</span>
+          </div>
+        </div>
+        <div class="hero-art" aria-hidden="true">
+          <div class="poster-stack">
+            <div class="fake-poster p1"><span>三体</span><i>2023 · 剧集</i></div>
+            <div class="fake-poster p2"><span>沙丘 2</span><i>2024 · 电影</i></div>
+            <div class="fake-poster p3"><span>漫长的季节</span><i>2023 · 剧集</i></div>
+            <div class="scan-line"></div>
+            <div class="floating-chip"><svg><use href="#i-check"/></svg>已写入 6 个 NFO</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="stats" id="stats">
+        <div class="stat-card">
+          <span class="stat-label">作品总数</span>
+          <strong id="stat-works">0</strong>
+          <span class="stat-sub" id="stat-files">0 个视频文件</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-label">已刮削</span>
+          <strong id="stat-applied">0</strong>
+          <span class="stat-sub">NFO 已就绪</span>
+        </div>
+        <div class="stat-card amber">
+          <span class="stat-label">待确认</span>
+          <strong id="stat-review">0</strong>
+          <span class="stat-sub">需要你看一眼</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-label">剧集文件</span>
+          <strong id="stat-episodes">0</strong>
+          <span class="stat-sub">按季自动归档</span>
+        </div>
+      </section>
+
+      <section class="toolbar">
+        <div class="toolbar-left">
+          <span class="result-count" id="result-count">0 个作品</span>
+          <span class="toolbar-hint" id="toolbar-hint"></span>
+        </div>
+        <div class="toolbar-right">
+          <select id="status-filter" class="select compact" aria-label="状态筛选">
+            <option value="all">全部状态</option>
+            <option value="new">未匹配</option>
+            <option value="review">待确认</option>
+            <option value="matched">已匹配</option>
+            <option value="applied">已刮削</option>
+            <option value="error">失败</option>
+          </select>
+          <button class="icon-btn" data-action="refresh" title="刷新"><svg><use href="#i-refresh"/></svg></button>
+        </div>
+      </section>
+
+      <section class="works" id="works"></section>
+
+      <section class="empty" id="empty" hidden>
+        <div class="empty-art"><svg><use href="#i-folder"/></svg></div>
+        <h3 id="empty-title">还没有作品</h3>
+        <p id="empty-text">添加一个存放电影或剧集的文件夹，轻刮会自己识别标题、年份和季集。</p>
+        <div class="empty-actions">
+          <button class="btn primary" data-action="add-folder"><svg><use href="#i-plus"/></svg>添加文件夹</button>
+          <button class="btn ghost" data-action="demo">载入演示库</button>
+        </div>
+      </section>
+
+      <footer class="page-footer">
+        <span>轻刮 QingGua · 本地运行，数据只留在你的电脑</span>
+        <span>Python 标准库 · 无账号 · 无遥测</span>
+      </footer>
+    </main>
+  </div>
+
+  <div class="drawer-scrim" id="drawer-scrim" hidden></div>
+  <aside class="drawer" id="drawer" aria-hidden="true">
+    <div class="drawer-head">
+      <span class="drawer-kicker">作品详情</span>
+      <button class="icon-btn" data-action="close-drawer" aria-label="关闭"><svg><use href="#i-close"/></svg></button>
+    </div>
+    <div class="drawer-body" id="drawer-body"></div>
+  </aside>
+
+  <div id="modal-root"></div>
+  <div id="toast-root" class="toast-root" aria-live="polite"></div>
+
+  <div class="jobbar" id="jobbar" hidden>
+    <div class="jobbar-inner">
+      <div class="job-spinner"></div>
+      <div class="job-copy">
+        <strong id="job-title">正在自动刮削</strong>
+        <span id="job-message">准备中…</span>
+      </div>
+      <div class="job-progress"><i id="job-progress"></i></div>
+      <span class="job-count" id="job-count">0 / 0</span>
+      <button class="btn ghost small" data-action="cancel-job">取消</button>
+    </div>
+  </div>
+
+  <script src="/app.js"></script>
+</body>
+</html>
