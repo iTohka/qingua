@@ -1,0 +1,2 @@
+# 轻刮 QingGua has no third-party dependencies.
+# Python 3.10+ is enough. Optional: ffprobe for stream details.
